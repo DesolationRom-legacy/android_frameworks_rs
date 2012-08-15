@@ -1598,7 +1598,9 @@ uint32_t rsSendToClientBlocking(int cmdID, const void *data, uint32_t len) {
 }
 
 static void SC_debugF(const char *s, float f) {
-    ALOGD("%s %f, 0x%08x", s, f, *((int *) (&f)));
+    int i;
+    memcpy(&i, &f, sizeof(float));
+    ALOGD("%s %f, 0x%08x", s, f, i);
 }
 static void SC_debugFv2(const char *s, float f1, float f2) {
     ALOGD("%s {%f, %f}", s, f1, f2);
@@ -1619,7 +1621,9 @@ static void SC_debugF4(const char *s, float4 f) {
     ALOGD("%s {%f, %f, %f, %f}", s, f.x, f.y, f.z, f.w);
 }
 static void SC_debugD(const char *s, double d) {
-    ALOGD("%s %f, 0x%08llx", s, d, *((long long *) (&d)));
+    long long ll;
+    memcpy(&ll, &d, sizeof(long long));
+    ALOGD("%s %f, 0x%08llx", s, d, ll);
 }
 static void SC_debugFM4v4(const char *s, const float *f) {
     ALOGD("%s {%f, %f, %f, %f", s, f[0], f[4], f[8], f[12]);
